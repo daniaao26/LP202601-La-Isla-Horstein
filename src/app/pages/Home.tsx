@@ -211,7 +211,7 @@ export function Home() {
             <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
               <span className="text-white text-2xl">🍣</span>
             </div>
-            <span className="text-3xl">Sushi Master</span>
+            <span className="text-3xl">Fukusuke Sushi-Delivery</span>
           </div>
           <p className="text-neutral-400 mb-6">
             Auténtica experiencia japonesa desde 2010
@@ -222,7 +222,7 @@ export function Home() {
             <a href="#" className="text-neutral-400 hover:text-white transition-colors">Twitter</a>
           </div>
           <p className="text-neutral-500 text-sm">
-            © 2026 Sushi Master. Todos los derechos reservados.
+            © 2026 Fukusuke Sushi-Delivery. Todos los derechos reservados.
           </p>
         </div>
       </footer>
