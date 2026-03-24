@@ -30,7 +30,7 @@ export const products: Product[] = [
     name: 'Combo Familiar',
     description: '32 piezas variadas para compartir: rolls, nigiri y hosomaki',
     price: 29990,
-    image: 'https://images.unsplash.com/photo-1599569950747-7945ea1766af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://tokyo-sushi.fr/image/cache/catalog/category/410.-595x550.jpg',
     category: 'combos',
   },
   {
@@ -94,7 +94,7 @@ export const products: Product[] = [
     name: 'Combo Pareja',
     description: '20 piezas variadas: rolls especiales y nigiri seleccionado',
     price: 19990,
-    image: 'https://images.unsplash.com/photo-1617093727343-374698b1b08d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://www.sushiexpress.com.py/wp-content/uploads/2020/03/combo-hiroshima-sushi_express.jpg',
     category: 'combos',
   },
 ];
