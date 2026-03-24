@@ -38,7 +38,7 @@ export const products: Product[] = [
     name: 'California Roll',
     description: 'Clásico roll con surimi, palta y pepino, cubierto con masago',
     price: 7490,
-    image: 'https://images.unsplash.com/photo-1688818227320-ad3f21537fa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://cdn.britannica.com/54/171754-050-8581F347/California-rolls-sushi.jpg',
     category: 'rolls',
   },
   {
@@ -54,7 +54,7 @@ export const products: Product[] = [
     name: 'Temaki de Atún',
     description: 'Cono de alga nori relleno de atún fresco, palta y mayonesa picante',
     price: 5990,
-    image: 'https://images.unsplash.com/photo-1617196035183-421b4917c92d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://t4.ftcdn.net/jpg/00/60/65/95/360_F_60659564_7kOsE4v0F2lQHKN3rECEEVMDx6UCMwiK.jpg',
     category: 'temaki',
   },
   {
@@ -62,7 +62,7 @@ export const products: Product[] = [
     name: 'Gyoza de Camarón',
     description: '6 piezas de empanadillas japonesas rellenas de camarón',
     price: 6490,
-    image: 'https://images.unsplash.com/photo-1626266061368-46a8f578ddd6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://images.unsplash.com/photo-1703080173985-936514c7c8bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
     category: 'entradas',
   },
   {
@@ -70,7 +70,7 @@ export const products: Product[] = [
     name: 'Sushi Vegetariano',
     description: '12 piezas con palta, pepino, zanahoria y champiñón',
     price: 8490,
-    image: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://th.bing.com/th/id/R.dca24af381f103c2f4b214b82506dc39?rik=LucBespyK9SvUg&pid=ImgRaw&r=0',
     category: 'vegetariano',
   },
   {
