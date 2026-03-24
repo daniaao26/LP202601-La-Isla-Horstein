@@ -2,7 +2,7 @@
   Daniela Aguilar 202111060-7
   Kris Casanga 202021069-1
   Valentina Ibacache 202173136-9
-  Carlos Lavín 202
+  Carlos Lavín 202173087-7
   Gonzalo Severin 202073088-1
   
   ## Running the code
