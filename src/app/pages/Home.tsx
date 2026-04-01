@@ -4,12 +4,14 @@ import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { ProductCard } from '../components/ProductCard';
 import { ProductDetailModal } from '../components/ProductDetailModal';
 import { useCart } from '../context/CartContext';
-import { products, categories } from '../data/products';
+import { useProducts } from '../context/ProductContext';
+import { categories } from '../data/products';
 import { Product } from '../context/CartContext';
 import { toast } from 'sonner';
 
 export function Home() {
   const { addToCart } = useCart();
+  const { products } = useProducts();
   const [selectedCategory, setSelectedCategory] = useState('todos');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -211,7 +213,7 @@ export function Home() {
             <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
               <span className="text-white text-2xl">🍣</span>
             </div>
-            <span className="text-3xl">Fukusuke Sushi-Delivery</span>
+            <span className="text-3xl">Sushi Master</span>
           </div>
           <p className="text-neutral-400 mb-6">
             Auténtica experiencia japonesa desde 2010
@@ -222,7 +224,7 @@ export function Home() {
             <a href="#" className="text-neutral-400 hover:text-white transition-colors">Twitter</a>
           </div>
           <p className="text-neutral-500 text-sm">
-            © 2026 Fukusuke Sushi-Delivery. Todos los derechos reservados.
+            © 2026 Sushi Master. Todos los derechos reservados.
           </p>
         </div>
       </footer>

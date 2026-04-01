@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { ArrowLeft, MapPin, Phone, User, Mail, Home, Clock, CreditCard } from 'lucide-react';
 import { toast } from 'sonner';
 
 export function Checkout() {
   const { cart, getCartTotal, clearCart } = useCart();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>('delivery');
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'card'>('card');
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    name: user?.name || '',
+    email: user?.email || '',
     phone: '',
     address: '',
     commune: '',
@@ -96,12 +98,14 @@ export function Checkout() {
     // Guardar orden en localStorage para historial (futuro)
     const order = {
       id: Date.now(),
+      userId: user?.id || 'guest',
       date: new Date().toISOString(),
       items: cart,
       total,
       deliveryMethod,
       paymentMethod,
       customerInfo: formData,
+      status: 'pending' as const,
     };
 
     const orders = JSON.parse(localStorage.getItem('sushi-orders') || '[]');
