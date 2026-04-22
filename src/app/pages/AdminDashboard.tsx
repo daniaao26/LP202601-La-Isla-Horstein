@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { ProductManagement } from '../components/ProductManagement';
+import { OrderDetailModal } from '../components/OrderDetailModal';
 import {
   Package,
   ShoppingBag,
@@ -9,8 +10,38 @@ import {
   TrendingUp,
   Clock,
   CheckCircle,
-  XCircle
+  XCircle,
+  Eye
 } from 'lucide-react';
+
+interface OrderItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
+
+interface SavedOrder {
+  id: number;
+  userId: string;
+  date: string;
+  items: OrderItem[];
+  total: number;
+  deliveryMethod: 'delivery' | 'pickup';
+  paymentMethod: 'cash' | 'card';
+  customerInfo: {
+    name: string;
+    email: string;
+    phone: string;
+    address?: string;
+    commune?: string;
+    reference?: string;
+    comments?: string;
+  };
+  status: 'pending' | 'preparing' | 'shipped' | 'delivered' | 'cancelled';
+  isPaid?: boolean;
+}
 
 interface Order {
   id: number;
@@ -18,46 +49,91 @@ interface Order {
   customerName: string;
   items: Array<{ name: string; quantity: number }>;
   total: number;
-  status: 'pendiente' | 'preparando' | 'enviado' | 'entregado' | 'cancelado';
+  status: 'pending' | 'preparing' | 'shipped' | 'delivered' | 'cancelled';
+  isPaid?: boolean;
+  fullData: SavedOrder;
 }
 
 export function AdminDashboard() {
   const { user } = useAuth();
-  
+  const [selectedOrder, setSelectedOrder] = useState<SavedOrder | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
+
   // Cargar órdenes desde localStorage
-  const [orders] = useState<Order[]>(() => {
+  const [orders, setOrders] = useState<Order[]>(() => {
     const savedOrders = JSON.parse(localStorage.getItem('sushi-orders') || '[]');
-    return savedOrders.map((order: any) => ({
+    return savedOrders.map((order: SavedOrder) => ({
       id: order.id,
       date: new Date(order.date).toLocaleString('es-CL'),
       customerName: order.customerInfo.name,
-      items: order.items.map((item: any) => ({
+      items: order.items.map((item: OrderItem) => ({
         name: item.name,
         quantity: item.quantity,
       })),
       total: order.total,
-      status: 'pendiente' as const,
+      status: order.status || 'pending',
+      isPaid: order.isPaid || false,
+      fullData: order,
     }));
   });
+
+  // Recargar órdenes cuando se actualice alguna
+  const handleRefreshOrders = () => {
+    const savedOrders = JSON.parse(localStorage.getItem('sushi-orders') || '[]');
+    const updatedOrders = savedOrders.map((order: SavedOrder) => ({
+      id: order.id,
+      date: new Date(order.date).toLocaleString('es-CL'),
+      customerName: order.customerInfo.name,
+      items: order.items.map((item: OrderItem) => ({
+        name: item.name,
+        quantity: item.quantity,
+      })),
+      total: order.total,
+      status: order.status || 'pending',
+      isPaid: order.isPaid || false,
+      fullData: order,
+    }));
+    setOrders(updatedOrders);
+    setRefreshKey(prev => prev + 1);
+
+    // Si hay un pedido seleccionado, actualizarlo también
+    if (selectedOrder) {
+      const updatedSelectedOrder = savedOrders.find((o: SavedOrder) => o.id === selectedOrder.id);
+      if (updatedSelectedOrder) {
+        setSelectedOrder(updatedSelectedOrder);
+      }
+    }
+  };
 
   const stats = {
     totalOrders: orders.length,
     totalRevenue: orders.reduce((sum, order) => sum + order.total, 0),
-    pendingOrders: orders.filter(o => o.status === 'pendiente').length,
-    completedOrders: orders.filter(o => o.status === 'entregado').length,
+    pendingOrders: orders.filter(o => o.status === 'pending').length,
+    completedOrders: orders.filter(o => o.status === 'delivered').length,
+  };
+
+  const getStatusLabel = (status: Order['status']) => {
+    const labels = {
+      pending: 'Pendiente',
+      preparing: 'Preparando',
+      shipped: 'Enviado',
+      delivered: 'Entregado',
+      cancelled: 'Cancelado',
+    };
+    return labels[status];
   };
 
   const getStatusColor = (status: Order['status']) => {
     switch (status) {
-      case 'pendiente':
+      case 'pending':
         return 'bg-yellow-100 text-yellow-700';
-      case 'preparando':
+      case 'preparing':
         return 'bg-blue-100 text-blue-700';
-      case 'enviado':
+      case 'shipped':
         return 'bg-purple-100 text-purple-700';
-      case 'entregado':
+      case 'delivered':
         return 'bg-green-100 text-green-700';
-      case 'cancelado':
+      case 'cancelled':
         return 'bg-red-100 text-red-700';
       default:
         return 'bg-neutral-100 text-neutral-700';
@@ -66,15 +142,15 @@ export function AdminDashboard() {
 
   const getStatusIcon = (status: Order['status']) => {
     switch (status) {
-      case 'pendiente':
+      case 'pending':
         return <Clock size={16} />;
-      case 'preparando':
+      case 'preparing':
         return <Package size={16} />;
-      case 'enviado':
+      case 'shipped':
         return <ShoppingBag size={16} />;
-      case 'entregado':
+      case 'delivered':
         return <CheckCircle size={16} />;
-      case 'cancelado':
+      case 'cancelled':
         return <XCircle size={16} />;
       default:
         return null;
@@ -181,6 +257,12 @@ export function AdminDashboard() {
                     <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-700">
                       Estado
                     </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-700">
+                      Pago
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-700">
+                      Acciones
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-neutral-200">
@@ -204,8 +286,26 @@ export function AdminDashboard() {
                       <td className="px-6 py-4">
                         <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(order.status)}`}>
                           {getStatusIcon(order.status)}
-                          {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                          {getStatusLabel(order.status)}
                         </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold ${
+                          order.isPaid
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-orange-100 text-orange-700'
+                        }`}>
+                          {order.isPaid ? '✓ Pagado' : 'Pendiente'}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <button
+                          onClick={() => setSelectedOrder(order.fullData)}
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold"
+                        >
+                          <Eye size={16} />
+                          Ver Detalles
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -214,6 +314,15 @@ export function AdminDashboard() {
             </div>
           )}
         </div>
+
+        {/* Modal de Detalle de Pedido */}
+        {selectedOrder && (
+          <OrderDetailModal
+            order={selectedOrder}
+            onClose={() => setSelectedOrder(null)}
+            onUpdate={handleRefreshOrders}
+          />
+        )}
       </div>
     </div>
   );

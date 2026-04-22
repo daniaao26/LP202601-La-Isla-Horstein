@@ -26,7 +26,7 @@ export function Header({ onCartOpen }: HeaderProps) {
             <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center">
               <span className="text-white text-xl">🍣</span>
             </div>
-            <span className="text-2xl font-bold text-neutral-900">Sushi Master</span>
+            <span className="text-2xl font-bold text-neutral-900">Fukusuke Sushi</span>
           </div>
           <nav className="hidden md:flex gap-8">
             <a href="#menu" className="text-neutral-700 hover:text-red-600 transition-colors">
