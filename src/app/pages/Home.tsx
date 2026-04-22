@@ -98,7 +98,7 @@ export function Home() {
               <MapPin size={24} />
               <div className="text-left">
                 <div className="font-semibold">Ubicación</div>
-                <div className="text-sm opacity-90">Av. Providencia 1234, Santiago</div>
+                <div className="text-sm opacity-90">Av. El olimpo 603 / Maipú / Santiago</div>
               </div>
             </div>
           </div>

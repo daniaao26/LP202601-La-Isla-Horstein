@@ -6,7 +6,7 @@ export const products: Product[] = [
     name: 'Roll Especial de Salmón',
     description: 'Roll de salmón, palta y queso crema con topping de semillas de sésamo',
     price: 8990,
-    image: 'https://images.unsplash.com/photo-1664882589261-498d42a9ad44?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://cdn7.kiwilimon.com/recetaimagen/3938/640x640/15440.jpg.jpg',
     category: 'rolls',
   },
   {
@@ -14,15 +14,15 @@ export const products: Product[] = [
     name: 'Nigiri Premium',
     description: 'Selección de 8 piezas de nigiri fresco: salmón, atún, camarón y pez mantequilla',
     price: 12990,
-    image: 'https://images.unsplash.com/photo-1598990906481-0c3e41b088e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://us.123rf.com/450wm/gkrphoto/gkrphoto1504/gkrphoto150400339/39147592-the-composition-of-nigiri-sushi-with-tuna-salmon-shrimp-butterfish-on-rice.jpg',
     category: 'nigiri',
   },
   {
     id: 3,
     name: 'Sashimi Deluxe',
-    description: 'Cortes premium de pescado fresco: salmón, atún rojo y pez limón',
+    description: 'Cortes premium de pescado fresco: salmón y atún rojo',
     price: 15990,
-    image: 'https://images.unsplash.com/photo-1653122024993-31e02aedb1ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://soyummy.com/wp-content/uploads/2024/05/close-up-of-fresh-sashimi-salmon-and-tuna-stockpack-istock-900x675.jpg',
     category: 'sashimi',
   },
   {
@@ -30,7 +30,7 @@ export const products: Product[] = [
     name: 'Combo Familiar',
     description: '32 piezas variadas para compartir: rolls, nigiri y hosomaki',
     price: 29990,
-    image: 'https://images.unsplash.com/photo-1599569950747-7945ea1766af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://tokyo-sushi.fr/image/cache/catalog/category/410.-595x550.jpg',
     category: 'combos',
   },
   {
@@ -78,7 +78,7 @@ export const products: Product[] = [
     name: 'Rainbow Roll',
     description: 'Roll California cubierto con láminas de salmón, atún y palta',
     price: 13990,
-    image: 'https://images.unsplash.com/photo-1611143669185-af224c5e3252?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://recetadesushi.com/wp-content/uploads/2023/07/California-roll-de-salmon-y-aguacate.jpg',
     category: 'rolls',
   },
   {
@@ -86,7 +86,7 @@ export const products: Product[] = [
     name: 'Nigiri de Atún',
     description: '4 piezas de nigiri de atún rojo premium',
     price: 9990,
-    image: 'https://images.unsplash.com/photo-1583623025817-d180a2221d0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://www.kikkoman.es/fileadmin/_processed_/2/3/csm_417-recipe-page-Nigiri_desktop_4f926bea38.jpg',
     category: 'nigiri',
   },
   {
@@ -94,7 +94,7 @@ export const products: Product[] = [
     name: 'Combo Pareja',
     description: '20 piezas variadas: rolls especiales y nigiri seleccionado',
     price: 19990,
-    image: 'https://images.unsplash.com/photo-1617093727343-374698b1b08d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400',
+    image: 'https://www.sushiexpress.com.py/wp-content/uploads/2020/03/combo-hiroshima-sushi_express.jpg',
     category: 'combos',
   },
 ];
